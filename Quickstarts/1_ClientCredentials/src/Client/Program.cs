@@ -16,7 +16,7 @@ namespace Client
 		private static async Task MainAsync()
 		{
 			// discover endpoints from metadata
-			var disco = await DiscoveryClient.GetAsync("http://localhost:5000");
+			var disco = await DiscoveryClient.GetAsync("https://localhost:44368/");
 			if (disco.IsError)
 			{
 				Console.WriteLine(disco.Error);
