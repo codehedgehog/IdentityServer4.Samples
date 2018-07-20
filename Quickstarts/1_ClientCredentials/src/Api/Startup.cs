@@ -17,7 +17,7 @@ namespace Api
             services.AddAuthentication("Bearer")
                 .AddIdentityServerAuthentication(options =>
                 {
-                    options.Authority = "http://localhost:5000";
+                    options.Authority = "https://localhost:44337";
                     options.RequireHttpsMetadata = false;
 
                     options.ApiName = "api1";
