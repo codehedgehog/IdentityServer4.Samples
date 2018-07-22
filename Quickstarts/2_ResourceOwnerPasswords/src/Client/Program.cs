@@ -1,14 +1,14 @@
-﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
+﻿// Copyright (c) Brock Allen & Dominick Baier. All righs reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
-
-using IdentityModel.Client;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace Client
 {
+	using IdentityModel.Client;
+	using Newtonsoft.Json.Linq;
+	using System;
+	using System.Net.Http;
+	using System.Threading.Tasks;
+
 	public class Program
 	{
 		public static void Main(string[] args) => MainAsync().GetAwaiter().GetResult();
@@ -34,7 +34,8 @@ namespace Client
 			}
 
 			Console.WriteLine(tokenResponse.Json);
-			Console.WriteLine("\n\n");
+			Console.WriteLine("\n\nPress any key to continue...\n\n");
+			Console.ReadLine();
 
 			// call api
 			var client = new HttpClient();
@@ -50,6 +51,8 @@ namespace Client
 				var content = await response.Content.ReadAsStringAsync();
 				Console.WriteLine(JArray.Parse(content));
 			}
+			Console.WriteLine("\n\nPress any key to continue...\n\n");
+			Console.ReadLine();
 		}
 	}
 }

@@ -1,34 +1,32 @@
 ﻿// Copyright (c) Brock Allen & Dominick Baier. All rights reserved.
 // Licensed under the Apache License, Version 2.0. See LICENSE in the project root for license information.
 
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-
 namespace Api
 {
-    public class Startup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvcCore()
-                .AddAuthorization()
-                .AddJsonFormatters();
+	using Microsoft.AspNetCore.Builder;
+	using Microsoft.Extensions.DependencyInjection;
 
-            services.AddAuthentication("Bearer")
-                .AddIdentityServerAuthentication(options =>
-                {
-                    options.Authority = "http://localhost:5000";
-                    options.RequireHttpsMetadata = false;
+	public class Startup
+	{
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddMvcCore()
+					.AddAuthorization()
+					.AddJsonFormatters();
 
-                    options.ApiName = "api1";
-                });
-        }
+			services.AddAuthentication("Bearer")
+					.AddIdentityServerAuthentication(options =>
+					{
+						options.Authority = "http://localhost:5000";
+						options.RequireHttpsMetadata = false;
+						options.ApiName = "api1";
+					});
+		}
 
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseAuthentication();
-
-            app.UseMvc();
-        }
-    }
+		public void Configure(IApplicationBuilder app)
+		{
+			app.UseAuthentication();
+			app.UseMvc();
+		}
+	}
 }
