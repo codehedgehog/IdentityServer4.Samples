@@ -7,32 +7,32 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace QuickstartIdentityServer
 {
-    public class Startup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
+	public class Startup
+	{
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddMvc();
 
-            // configure identity server with in-memory stores, keys, clients and scopes
-            services.AddIdentityServer()
-                .AddDeveloperSigningCredential()
-                .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                .AddInMemoryApiResources(Config.GetApiResources())
-                .AddInMemoryClients(Config.GetClients())
-                .AddTestUsers(Config.GetUsers());
-        }
+			// configure identity server with in-memory stores, keys, clients and scopes
+			services.AddIdentityServer()
+					.AddDeveloperSigningCredential()
+					.AddInMemoryIdentityResources(Config.GetIdentityResources())
+					.AddInMemoryApiResources(Config.GetApiResources())
+					.AddInMemoryClients(Config.GetClients())
+					.AddTestUsers(Config.GetUsers());
+		}
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		{
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+			}
 
-            app.UseIdentityServer();
+			app.UseIdentityServer();
 
-            app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
-        }
-    }
+			app.UseStaticFiles();
+			app.UseMvcWithDefaultRoute();
+		}
+	}
 }

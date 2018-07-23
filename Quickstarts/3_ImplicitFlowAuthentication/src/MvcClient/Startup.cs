@@ -5,47 +5,47 @@ using System.IdentityModel.Tokens.Jwt;
 
 namespace MvcClient
 {
-    public class Startup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvc();
+	public class Startup
+	{
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddMvc();
 
-            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+			JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-            services.AddAuthentication(options =>
-                {
-                    options.DefaultScheme = "Cookies";
-                    options.DefaultChallengeScheme = "oidc";
-                })
-                .AddCookie("Cookies")
-                .AddOpenIdConnect("oidc", options =>
-                {
-                    options.SignInScheme = "Cookies";
+			services.AddAuthentication(options =>
+					{
+						options.DefaultScheme = "Cookies";
+						options.DefaultChallengeScheme = "oidc";
+					})
+					.AddCookie("Cookies")
+					.AddOpenIdConnect("oidc", options =>
+					{
+						options.SignInScheme = "Cookies";
 
-                    options.Authority = "http://localhost:5000";
-                    options.RequireHttpsMetadata = false;
+						options.Authority = "http://localhost:5000";
+						options.RequireHttpsMetadata = false;
 
-                    options.ClientId = "mvc";
-                    options.SaveTokens = true;
-                });
-        }
+						options.ClientId = "mvc";
+						options.SaveTokens = true;
+					});
+		}
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                app.UseExceptionHandler("/Home/Error");
-            }
+		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+		{
+			if (env.IsDevelopment())
+			{
+				app.UseDeveloperExceptionPage();
+			}
+			else
+			{
+				app.UseExceptionHandler("/Home/Error");
+			}
 
-            app.UseAuthentication();
+			app.UseAuthentication();
 
-            app.UseStaticFiles();
-            app.UseMvcWithDefaultRoute();
-        }
-    }
+			app.UseStaticFiles();
+			app.UseMvcWithDefaultRoute();
+		}
+	}
 }

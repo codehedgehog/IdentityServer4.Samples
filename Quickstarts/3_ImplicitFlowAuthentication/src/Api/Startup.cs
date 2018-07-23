@@ -6,29 +6,29 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Api
 {
-    public class Startup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddMvcCore()
-                .AddAuthorization()
-                .AddJsonFormatters();
+	public class Startup
+	{
+		public void ConfigureServices(IServiceCollection services)
+		{
+			services.AddMvcCore()
+					.AddAuthorization()
+					.AddJsonFormatters();
 
-            services.AddAuthentication("Bearer")
-                .AddIdentityServerAuthentication(options =>
-                {
-                    options.Authority = "http://localhost:5000";
-                    options.RequireHttpsMetadata = false;
+			services.AddAuthentication("Bearer")
+					.AddIdentityServerAuthentication(options =>
+					{
+						options.Authority = "http://localhost:5000";
+						options.RequireHttpsMetadata = false;
 
-                    options.ApiName = "api1";
-                });
-        }
+						options.ApiName = "api1";
+					});
+		}
 
-        public void Configure(IApplicationBuilder app)
-        {
-            app.UseAuthentication();
+		public void Configure(IApplicationBuilder app)
+		{
+			app.UseAuthentication();
 
-            app.UseMvc();
-        }
-    }
+			app.UseMvc();
+		}
+	}
 }
