@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-
-namespace MvcClient.Controllers
+﻿namespace MvcClient.Controllers
 {
+	using Microsoft.AspNetCore.Authentication;
+	using Microsoft.AspNetCore.Authorization;
+	using Microsoft.AspNetCore.Mvc;
+	using System.Threading.Tasks;
+
 	public class HomeController : Controller
 	{
 		public IActionResult Index()
@@ -16,7 +16,6 @@ namespace MvcClient.Controllers
 		public IActionResult Secure()
 		{
 			ViewData["Message"] = "Secure page.";
-
 			return View();
 		}
 

@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.DependencyInjection;
-using System.IdentityModel.Tokens.Jwt;
-
-namespace MvcClient
+﻿namespace MvcClient
 {
+	using Microsoft.AspNetCore.Builder;
+	using Microsoft.AspNetCore.Hosting;
+	using Microsoft.Extensions.DependencyInjection;
+	using System.IdentityModel.Tokens.Jwt;
+
 	public class Startup
 	{
 		public void ConfigureServices(IServiceCollection services)
@@ -22,10 +22,8 @@ namespace MvcClient
 					.AddOpenIdConnect("oidc", options =>
 					{
 						options.SignInScheme = "Cookies";
-
 						options.Authority = "http://localhost:5000";
 						options.RequireHttpsMetadata = false;
-
 						options.ClientId = "mvc";
 						options.SaveTokens = true;
 					});
@@ -33,17 +31,9 @@ namespace MvcClient
 
 		public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 		{
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
-			else
-			{
-				app.UseExceptionHandler("/Home/Error");
-			}
-
+			if (env.IsDevelopment()) { app.UseDeveloperExceptionPage(); }
+			else { app.UseExceptionHandler("/Home/Error"); }
 			app.UseAuthentication();
-
 			app.UseStaticFiles();
 			app.UseMvcWithDefaultRoute();
 		}
